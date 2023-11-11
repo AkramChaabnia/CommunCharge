@@ -1,4 +1,4 @@
-package up.mi.ara.phase1;
+package up.mi.ara.phase1.src;
 
 public class Ville {
   private String nom;
