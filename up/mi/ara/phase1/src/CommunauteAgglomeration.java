@@ -39,9 +39,31 @@ public class CommunauteAgglomeration {
   }
 
   public void afficherVilles() {
+    System.out.println("Liste des villes : ");
     for (Ville ville : this.mapVilles.keySet()) {
       System.out.print(ville.getNom() + " ");
     }
+  }
+
+  public void afficherRoutes() {
+    System.out.println("Liste des routes : ");
+    for (Ville ville : this.mapVilles.keySet()) {
+      System.out.print(ville.getNom() + " : ");
+      for (Ville villeAdjacente : this.mapVilles.get(ville)) {
+        System.out.print(villeAdjacente.getNom() + " ");
+      }
+      System.out.println();
+    }
+  }
+
+  public void afficherVillesAvecZoneRecharge() {
+    System.out.println("Liste des villes avec zone de recharge : ");
+    for (Ville ville : this.mapVilles.keySet()) {
+      if (ville.aZoneRecharge()) {
+        System.out.print(ville.getNom() + " ");
+      }
+    }
+    System.out.println();
   }
 
   public int getNombreVilles() {
@@ -104,8 +126,11 @@ public class CommunauteAgglomeration {
           System.out.println("====================================");
         }
       } else if (choix == 3) {
-        sc.close();
-        System.out.println("Retour au menu principal");
+        // sc.close();
+        System.out.println("***************************************************");
+        System.out.println();
+        System.out.println("Passage au menu suivant: ");
+
         return;
       } else {
         System.out.println("Choix non-valable");
@@ -124,19 +149,43 @@ public class CommunauteAgglomeration {
       System.out.println("3. Quitter");
       System.out.print("Entrez votre choix : ");
       choix = sc.nextInt();
+      sc.nextLine();
       switch (choix) {
         case 1:
-          System.out.print("Entrez le nom de la ville : ");
+          System.out.println("Entrez le nom de la ville : ");
           String nomVille = sc.nextLine();
           nomVille = nomVille.toUpperCase();
-          Ville ville = new Ville(nomVille);
+
+          Ville ville = null;
+
+          for (Ville v : getVilles()) {
+            if (v.getNom().equals(nomVille)) {
+              System.out.println("Ville trouvée");
+              ville = v;
+            }
+
+          } // une exception a gere si les villes ne sont pas trouvees
           ajouterZoneRecharge(ville);
           System.out.println("====================================");
           System.out.println("La zone de recharge a été ajoutée à la ville " + nomVille);
           System.out.println("====================================");
           break;
         case 2:
+          System.out.println("Entrez le nom de la ville : ");
+          nomVille = sc.nextLine();
+          nomVille = nomVille.toUpperCase();
+
+          ville = null;
+
+          for (Ville v : getVilles()) {
+            if (v.getNom().equals(nomVille)) {
+              System.out.println("Ville trouvée");
+              ville = v;
+            }
+
+          } // une exception a gere si les villes ne sont pas trouvees
           System.out.print("Entrez le nom de la ville : ");
+          System.out.println();
           nomVille = sc.nextLine();
           nomVille = nomVille.toUpperCase();
           ville = new Ville(nomVille);
@@ -146,7 +195,7 @@ public class CommunauteAgglomeration {
           System.out.println("====================================");
           break;
         case 3:
-          System.out.println("Retour au menu principal");
+          System.out.println("Le menu a été quitté avec succès ");
           break;
         default:
           System.out.println("Choix invalide");
@@ -156,6 +205,5 @@ public class CommunauteAgglomeration {
 
     sc.close();
   }
-
 
 }

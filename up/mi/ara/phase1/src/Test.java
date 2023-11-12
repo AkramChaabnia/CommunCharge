@@ -24,7 +24,10 @@ public class Test {
     communauteA.menuAjouterSupprimerRoute();
     System.out.println();
     communauteA.menuAjouterSupprimerZoneRecharge();
+    communauteA.afficherRoutes();
+    communauteA.afficherVillesAvecZoneRecharge();
     sc.close();
+    System.out.println("fin du programme. Au revoir !");
 
   }
 

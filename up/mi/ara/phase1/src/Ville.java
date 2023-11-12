@@ -14,7 +14,7 @@ public class Ville {
   }
 
   public boolean aZoneRecharge() {
-    return aZoneRecharge;
+    return this.aZoneRecharge;
   }
 
   public void setNom(String nom) {
