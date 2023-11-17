@@ -6,40 +6,60 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Classe représentant une communauté d'agglomération
 public class CommunauteAgglomeration {
   // private final NOMBRES_VILLES = 26;
+  // Nombre de villes dans la communauté d'agglomération
   private int nombreVilles;
+  // Map associant à chaque ville une liste de villes adjacentes
   private Map<Ville, List<Ville>> mapVilles;
   private Scanner scanner;
 
+  // Constructeur de la classe
   public CommunauteAgglomeration(int nombreVilles) {
     this.nombreVilles = nombreVilles;
     this.mapVilles = new HashMap<Ville, List<Ville>>();
     this.scanner = new Scanner(System.in);
   }
 
+  // Méthode pour ajouter une ville à la communauté d'agglomération
   public void ajouterVille(Ville ville) {
     this.mapVilles.put(ville, new ArrayList<Ville>());
   }
 
+  // Méthode pour ajouter une route entre deux villes
   public void ajouterRoute(Ville ville1, Ville ville2) {
-    this.mapVilles.get(ville1).add(ville2);
-    this.mapVilles.get(ville2).add(ville1);
+    if (this.mapVilles.get(ville1).contains(ville2) || this.mapVilles.get(ville2).contains(ville1)) {
+      System.out.println("Il y a déjà une route entre ces deux villes.");
+    } else {
+      this.mapVilles.get(ville1).add(ville2);
+      this.mapVilles.get(ville2).add(ville1);
+      System.out.println("Route ajoutée entre " + ville1.getNom() + " et " + ville2.getNom() + ".");
+    }
   }
 
+  // Méthode pour supprimer une route entre deux villes
   public void supprimerRoute(Ville ville1, Ville ville2) {
-    this.mapVilles.get(ville1).remove(ville2);
-    this.mapVilles.get(ville2).remove(ville1);
+    if (this.mapVilles.get(ville1).contains(ville2) || this.mapVilles.get(ville2).contains(ville1)) {
+      this.mapVilles.get(ville1).remove(ville2);
+      this.mapVilles.get(ville2).remove(ville1);
+      System.out.println("Route supprimée entre " + ville1.getNom() + " et " + ville2.getNom() + ".");
+    } else {
+      System.out.println("Il n'y a pas de route entre ces deux villes.");
+    }
   }
 
-  public List<Ville> getVillesAdjacentes(Ville ville) { // retourne la liste des villes adjacentes à la ville passée en
+  // Méthode pour obtenir la liste des villes adjacentes à une ville donnée
+  public List<Ville> getVillesAdjacentes(Ville ville) {
     return this.mapVilles.get(ville);
   }
 
-  public List<Ville> getVilles() { // retourne la liste des villes de la communauté d'agglomération
+  // Méthode pour obtenir la liste des villes de la communauté d'agglomération
+  public List<Ville> getVilles() {
     return new ArrayList<Ville>(this.mapVilles.keySet());
   }
 
+  // Méthode pour afficher la liste des villes
   public void afficherVilles() {
     System.out.println("Liste des villes : ");
     for (Ville ville : this.mapVilles.keySet()) {
@@ -47,6 +67,7 @@ public class CommunauteAgglomeration {
     }
   }
 
+  // Méthode pour afficher la liste des routes
   public void afficherRoutes() {
     System.out.println("Liste des routes : ");
     for (Ville ville : this.mapVilles.keySet()) {
@@ -58,6 +79,7 @@ public class CommunauteAgglomeration {
     }
   }
 
+  // Méthode pour afficher la liste des villes avec une zone de recharge
   public void afficherVillesAvecZoneRecharge() {
     System.out.println("Liste des villes avec zone de recharge : ");
     for (Ville ville : this.mapVilles.keySet()) {
@@ -68,10 +90,12 @@ public class CommunauteAgglomeration {
     System.out.println();
   }
 
+  // Méthode pour obtenir le nombre de villes
   public int getNombreVilles() {
     return this.nombreVilles;
   }
 
+  // Méthode pour ajouter une zone de recharge à une ville
   public void ajouterZoneRecharge(Ville ville) {
     if (!ville.aZoneRecharge()) {
       ville.setZoneRecharge(true);
@@ -81,6 +105,7 @@ public class CommunauteAgglomeration {
     }
   }
 
+  // Méthode pour supprimer une zone de recharge d'une ville
   public void supprimerZoneRecharge(Ville ville) {
     if (ville.aZoneRecharge()) {
       // Vérifier si des villes voisines ont encore une zone de recharge
@@ -107,9 +132,11 @@ public class CommunauteAgglomeration {
     }
   }
 
+  // Méthode pour afficher un menu permettant d'ajouter ou de supprimer une route
   public void menuAjouterSupprimerRoute() {
     int choix;
     do {
+      System.out.println();
       System.out.println("1. Ajouter une route");
       System.out.println("2. Supprimer une route");
       System.out.println("3. Quitter");
@@ -133,32 +160,24 @@ public class CommunauteAgglomeration {
 
         for (Ville ville : getVilles()) {
           if (ville.getNom().equals(nomVille1)) {
-            System.out.println("Ville 1 trouvée");
+            System.out.println("Ville " + ville.getNom() + " trouvée");
             v1 = ville;
           }
           if (ville.getNom().equals(nomVille2)) {
-            System.out.println("Ville 2 trouvée");
+            System.out.println("Ville " + ville.getNom() + " trouvée");
             v2 = ville;
           }
         } // une exception a gere si les villes ne sont pas trouvees
 
         if (choix == 1) {
           ajouterRoute(v1, v2);
-          System.out.println("====================================");
-          System.out.println("Route ajoutée");
-          System.out.println("====================================");
         } else if (choix == 2) {
           supprimerRoute(v1, v2);
-          System.out.println("====================================");
-          System.out.println("Route supprimée");
-          System.out.println("====================================");
         }
       } else if (choix == 3) {
         // sc.close();
-        System.out.println("***************************************************");
         System.out.println();
         System.out.println("Passage au menu suivant: ");
-
         return;
       } else {
         System.out.println("Choix non-valable");
@@ -168,6 +187,8 @@ public class CommunauteAgglomeration {
 
   }
 
+  // Méthode pour afficher un menu permettant d'ajouter ou de supprimer une zone
+  // de recharge
   public void menuAjouterSupprimerZoneRecharge() {
     int choix;
     do {
