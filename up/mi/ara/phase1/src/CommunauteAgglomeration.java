@@ -6,20 +6,26 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Classe représentant une communauté d'agglomération
 public class CommunauteAgglomeration {
   // private final NOMBRES_VILLES = 26;
+  // Nombre de villes dans la communauté d'agglomération
   private int nombreVilles;
+  // Map associant à chaque ville une liste de villes adjacentes
   private Map<Ville, List<Ville>> mapVilles;
 
+  // Constructeur de la classe
   public CommunauteAgglomeration(int nombreVilles) {
     this.nombreVilles = nombreVilles;
     this.mapVilles = new HashMap<Ville, List<Ville>>();
   }
 
+  // Méthode pour ajouter une ville à la communauté d'agglomération
   public void ajouterVille(Ville ville) {
     this.mapVilles.put(ville, new ArrayList<Ville>());
   }
 
+  // Méthode pour ajouter une route entre deux villes
   public void ajouterRoute(Ville ville1, Ville ville2) {
     if (this.mapVilles.get(ville1).contains(ville2) || this.mapVilles.get(ville2).contains(ville1)) {
       System.out.println("Il y a déjà une route entre ces deux villes.");
@@ -30,6 +36,7 @@ public class CommunauteAgglomeration {
     }
   }
 
+  // Méthode pour supprimer une route entre deux villes
   public void supprimerRoute(Ville ville1, Ville ville2) {
     if (this.mapVilles.get(ville1).contains(ville2) || this.mapVilles.get(ville2).contains(ville1)) {
       this.mapVilles.get(ville1).remove(ville2);
@@ -40,14 +47,17 @@ public class CommunauteAgglomeration {
     }
   }
 
-  public List<Ville> getVillesAdjacentes(Ville ville) { // retourne la liste des villes adjacentes à la ville passée en
+  // Méthode pour obtenir la liste des villes adjacentes à une ville donnée
+  public List<Ville> getVillesAdjacentes(Ville ville) {
     return this.mapVilles.get(ville);
   }
 
-  public List<Ville> getVilles() { // retourne la liste des villes de la communauté d'agglomération
+  // Méthode pour obtenir la liste des villes de la communauté d'agglomération
+  public List<Ville> getVilles() {
     return new ArrayList<Ville>(this.mapVilles.keySet());
   }
 
+  // Méthode pour afficher la liste des villes
   public void afficherVilles() {
     System.out.println("Liste des villes : ");
     for (Ville ville : this.mapVilles.keySet()) {
@@ -55,6 +65,7 @@ public class CommunauteAgglomeration {
     }
   }
 
+  // Méthode pour afficher la liste des routes
   public void afficherRoutes() {
     System.out.println("Liste des routes : ");
     for (Ville ville : this.mapVilles.keySet()) {
@@ -66,6 +77,7 @@ public class CommunauteAgglomeration {
     }
   }
 
+  // Méthode pour afficher la liste des villes avec une zone de recharge
   public void afficherVillesAvecZoneRecharge() {
     System.out.println("Liste des villes avec zone de recharge : ");
     for (Ville ville : this.mapVilles.keySet()) {
@@ -76,18 +88,22 @@ public class CommunauteAgglomeration {
     System.out.println();
   }
 
+  // Méthode pour obtenir le nombre de villes
   public int getNombreVilles() {
     return this.nombreVilles;
   }
 
+  // Méthode pour ajouter une zone de recharge à une ville
   public void ajouterZoneRecharge(Ville ville) {
     ville.setZoneRecharge(true);
   }
 
+  // Méthode pour supprimer une zone de recharge d'une ville
   public void supprimerZoneRecharge(Ville ville) {
     ville.setZoneRecharge(false);
   }
 
+  // Méthode pour afficher un menu permettant d'ajouter ou de supprimer une route
   public void menuAjouterSupprimerRoute() {
     Scanner sc = new Scanner(System.in);
     int choix;
@@ -144,6 +160,8 @@ public class CommunauteAgglomeration {
 
   }
 
+  // Méthode pour afficher un menu permettant d'ajouter ou de supprimer une zone
+  // de recharge
   public void menuAjouterSupprimerZoneRecharge() {
     Scanner sc = new Scanner(System.in);
     int choix;
