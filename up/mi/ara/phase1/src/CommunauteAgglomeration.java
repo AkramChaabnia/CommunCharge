@@ -8,11 +8,14 @@ import java.util.Scanner;
 
 // Classe représentant une communauté d'agglomération
 public class CommunauteAgglomeration {
-  // private final NOMBRES_VILLES = 26;
+
+  
   // Nombre de villes dans la communauté d'agglomération
   private int nombreVilles;
   // Map associant à chaque ville une liste de villes adjacentes
   private Map<Ville, List<Ville>> mapVilles;
+
+  // Scanner pour lire les entrées de l'utilisateur dans les méthodes demandant des saisies à l'utilisateur
   private Scanner scanner;
 
   // Constructeur de la classe
@@ -45,7 +48,7 @@ public class CommunauteAgglomeration {
       this.mapVilles.get(ville2).remove(ville1);
       System.out.println("Route supprimée entre " + ville1.getNom() + " et " + ville2.getNom() + ".");
     } else {
-      System.out.println("Il n'y a pas de route entre ces deux villes.");
+      System.out.println("Impossible de supprimer une route inexistante entre ces deux villes.");
     }
   }
 

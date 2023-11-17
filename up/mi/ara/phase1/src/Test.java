@@ -2,7 +2,7 @@ package up.mi.ara.phase1.src;
 
 import java.util.Scanner;
 
-// Classe pour tester la communauté d'agglomération
+// Classe pour tester la communauté d'agglomération contenant la méthode main()
 public class Test {
   public static void main(String[] args) {
     int nombreVilles;
@@ -36,10 +36,14 @@ public class Test {
     communauteA.afficherRoutes();
     // Affiche les villes avec une zone de recharge
     communauteA.afficherVillesAvecZoneRecharge();
+    // Ferme le scanner correspondant à la communauté d'agglomération
     communauteA.closeScanner();
     // Ferme le scanner
     sc.close();
-    System.out.println("fin du programme. Au revoir !");
+
+    System.out.println();
+    System.out.println();
+    System.out.println("fin du programme. Au revoir !!!!");
 
   }
 
