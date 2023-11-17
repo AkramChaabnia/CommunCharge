@@ -21,13 +21,23 @@ public class CommunauteAgglomeration {
   }
 
   public void ajouterRoute(Ville ville1, Ville ville2) {
-    this.mapVilles.get(ville1).add(ville2);
-    this.mapVilles.get(ville2).add(ville1);
+    if (this.mapVilles.get(ville1).contains(ville2) || this.mapVilles.get(ville2).contains(ville1)) {
+      System.out.println("Il y a déjà une route entre ces deux villes.");
+    } else {
+      this.mapVilles.get(ville1).add(ville2);
+      this.mapVilles.get(ville2).add(ville1);
+      System.out.println("Route ajoutée entre " + ville1.getNom() + " et " + ville2.getNom() + ".");
+    }
   }
 
   public void supprimerRoute(Ville ville1, Ville ville2) {
-    this.mapVilles.get(ville1).remove(ville2);
-    this.mapVilles.get(ville2).remove(ville1);
+    if (this.mapVilles.get(ville1).contains(ville2) || this.mapVilles.get(ville2).contains(ville1)) {
+      this.mapVilles.get(ville1).remove(ville2);
+      this.mapVilles.get(ville2).remove(ville1);
+      System.out.println("Route supprimée entre " + ville1.getNom() + " et " + ville2.getNom() + ".");
+    } else {
+      System.out.println("Il n'y a pas de route entre ces deux villes.");
+    }
   }
 
   public List<Ville> getVillesAdjacentes(Ville ville) { // retourne la liste des villes adjacentes à la ville passée en
@@ -82,10 +92,12 @@ public class CommunauteAgglomeration {
     Scanner sc = new Scanner(System.in);
     int choix;
     do {
+      System.out.println();
       System.out.println("1. Ajouter une route");
       System.out.println("2. Supprimer une route");
       System.out.println("3. Quitter");
       System.out.print("Votre choix : ");
+      System.out.println();
       choix = sc.nextInt();
       sc.nextLine();
 
@@ -105,32 +117,24 @@ public class CommunauteAgglomeration {
 
         for (Ville ville : getVilles()) {
           if (ville.getNom().equals(nomVille1)) {
-            System.out.println("Ville 1 trouvée");
+            System.out.println("Ville " + ville.getNom() + " trouvée");
             v1 = ville;
           }
           if (ville.getNom().equals(nomVille2)) {
-            System.out.println("Ville 2 trouvée");
+            System.out.println("Ville " + ville.getNom() + " trouvée");
             v2 = ville;
           }
         } // une exception a gere si les villes ne sont pas trouvees
 
         if (choix == 1) {
           ajouterRoute(v1, v2);
-          System.out.println("====================================");
-          System.out.println("Route ajoutée");
-          System.out.println("====================================");
         } else if (choix == 2) {
           supprimerRoute(v1, v2);
-          System.out.println("====================================");
-          System.out.println("Route supprimée");
-          System.out.println("====================================");
         }
       } else if (choix == 3) {
         // sc.close();
-        System.out.println("***************************************************");
         System.out.println();
         System.out.println("Passage au menu suivant: ");
-
         return;
       } else {
         System.out.println("Choix non-valable");
