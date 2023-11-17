@@ -26,6 +26,7 @@ public class Test {
     communauteA.menuAjouterSupprimerZoneRecharge();
     communauteA.afficherRoutes();
     communauteA.afficherVillesAvecZoneRecharge();
+    communauteA.closeScanner();
     sc.close();
     System.out.println("fin du programme. Au revoir !");
 
