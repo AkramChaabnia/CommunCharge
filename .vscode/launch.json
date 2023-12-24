@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "up.mi.ara.terminal.Main",
+            "projectName": "Projet_prog"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "up.mi.ara.interfaces.App",
+            "projectName": "Projet_prog"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "up.mi.ara.terminal.Main",
+            "projectName": "Projet_prog"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "App",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "up.mi.ara.interfaces.App",
+"vmArgs": "--module-path lib --add-modules javafx.controls,javafx.fxml,javafx.graphics",            "console": "integratedTerminal",
+            "projectName": "Projet_prog"
+        }
+    ]
+}
