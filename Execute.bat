@@ -1,10 +1,10 @@
 @echo off
 
 rem Set the path to the lib directory
-set LIB_PATH=F:\javafx-sdk-19\lib
+set LIB_PATH=lib
 
 rem Set the path to the bin directory
-set BIN_PATH=bin\up\mi\ara\interfaces
+set BIN_PATH=bin
 
 rem Compile the Java code with UTF-8 encoding
 javac --module-path "%LIB_PATH%" --add-modules javafx.controls,javafx.fxml -encoding UTF-8 -d "%BIN_PATH%" "src\up\mi\ara\interfaces\App.java"
